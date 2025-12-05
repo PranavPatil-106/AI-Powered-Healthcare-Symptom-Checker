@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+mysql-connector-python
+sqlalchemy
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+google-generativeai
+streamlit
+requests
+python-dotenv
