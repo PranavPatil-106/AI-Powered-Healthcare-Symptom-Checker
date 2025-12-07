@@ -1,41 +1,51 @@
-# AI Powered Healthcare Symptom Checker 🩺
+# Healthcare Symptom Checker 🩺
 
-An intelligent symptom checker application that uses Google's Gemini AI to analyze symptoms and provide probable conditions, precautions, severity levels, and medical advice. Built with FastAPI, Streamlit, and MySQL.
+Welcome to the **Healthcare Symptom Checker**, an AI-powered application designed to provide preliminary medical insights based on user-reported symptoms. This project demonstrates the integration of a modern web frontend, a robust backend API, and a Large Language Model (LLM) to deliver educational health information.
 
-## ✨ Features
+## 🎯 Objective
 
--   **AI-Powered Analysis**: Uses Gemini Flash to analyze symptoms in natural language.
--   **Severity Assessment**: Automatically categorizes symptoms as Low, Moderate, or High severity.
--   **Secure Authentication**: User signup and login with JWT-based authentication and password hashing.
--   **History Tracking**: Saves all symptom checks with filtering (by severity) and sorting (by date) capabilities.
--   **User-Friendly UI**: Clean, modern interface built with Streamlit, featuring a sidebar for easy navigation and healthy tips.
--   **Responsive Design**: Works seamlessly on desktop and mobile browsers.
+The primary goal of this system is to bridge the gap between initial symptom onset and medical consultation. By inputting symptoms in natural language, users receive:
+1.  **Probable Conditions**: A list of potential causes for the symptoms.
+2.  **Recommendations**: Suggested next steps and precautions.
+3.  **Severity Assessment**: An AI-generated estimation of urgency (Low, Moderate, High).
 
-## 🛠️ Tech Stack
+> **Disclaimer**: This tool is for **educational purposes only** and does not replace professional medical advice.
 
--   **Frontend**: Streamlit (Python)
--   **Backend**: FastAPI (Python)
--   **Database**: MySQL
--   **AI Model**: Google Gemini (via LangChain)
--   **Authentication**: JWT (JSON Web Tokens) & Passlib (pbkdf2_sha256)
+## 📋 Scope of Work
 
-## 🚀 Setup Instructions
+This project fulfills the requirements of **Task 6: Healthcare Symptom Checker**, covering:
+*   **Input**: User-friendly text interface for describing symptoms.
+*   **Output**: Structured response containing conditions, precautions, and when to see a doctor.
+*   **Interface**: A full-stack web application with a dedicated frontend form.
 
-### Prerequisites
+## 🏛️ Technical Architecture
 
--   Python 3.8+
--   MySQL Server
--   Google Gemini API Key
+I designed this application with a modular architecture to ensure scalability and maintainability:
+
+*   **Frontend**: Built with **Streamlit** for a responsive and interactive user interface.
+*   **Backend**: Developed using **FastAPI** to handle requests, manage user sessions, and route API calls.
+*   **Database**: **MySQL** is used to securely store user profiles and symptom history.
+*   **LLM Integration**: **Google Gemini (Flash)** via LangChain provides the reasoning engine for symptom analysis.
+
+### Tech Stack
+*   **Language**: Python 3.9+
+*   **Frameworks**: FastAPI, Streamlit
+*   **AI/ML**: LangChain, Google Gemini API
+*   **Database**: MySQL, SQLAlchemy (ORM)
+*   **Authentication**: JWT (JSON Web Tokens) with Passlib
+
+## 🚀 Setup & Installation
+
+Follow these steps to run the project locally.
 
 ### 1. Clone the Repository
-
 ```bash
-git clone <repository-url>
-cd ai-healthcare-symptom-checker
+git clone <repository_url>
+cd healthcare-symptom-checker
 ```
 
-### 2. Create Virtual Environment
-
+### 2. Set Up Virtual Environment
+It is recommended to use a virtual environment.
 ```bash
 python -m venv venv
 # Windows
@@ -45,53 +55,53 @@ source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
-
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Environment Configuration
-
-Create a `.env` file in the root directory:
-
+### 4. Configure Environment Variables
+Create a `.env` file in the root directory and add your credentials:
 ```env
-DATABASE_URL=mysql+mysqlconnector://root:password@localhost:3306/ai_healthcare_symptom_checker
-GEMINI_API_KEY=your_gemini_api_key_here
-SECRET_KEY=your_secret_key_here
+DATABASE_URL=mysql+mysqlconnector://<user>:<password>@localhost:3306/<database_name>
+GEMINI_API_KEY=your_google_gemini_api_key
+SECRET_KEY=your_secure_random_secret_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-### 5. Database Setup
-
-1.  Open MySQL Workbench or your preferred SQL client.
-2.  Run the script located in `schema.sql` to create the database and tables.
+### 5. Initialize Database
+Ensure your MySQL server is running, then create the schema:
+```bash
+# You can run the provided schema.sql in your MySQL client
+source schema.sql
+```
 
 ### 6. Run the Application
+You will need two terminal windows.
 
-**Start the Backend Server:**
-
+**Terminal 1: Backend**
 ```bash
 cd backend
 uvicorn main:app --reload
 ```
 
-**Start the Frontend Application:**
-
-Open a new terminal, activate the venv, and run:
-
+**Terminal 2: Frontend**
 ```bash
 streamlit run frontend/app.py
 ```
 
-## 📝 Usage
+## 💡 Usage Guide
 
-1.  **Sign Up**: Create a new account with your username, email, and password.
-2.  **Login**: Access your account.
-3.  **Check Symptoms**: Enter your symptoms in the text box and click "Check Symptoms".
-4.  **View Results**: Read the AI's analysis, including probable conditions, precautions, and severity level.
-5.  **History**: View your past checks in the "History" tab. Filter by severity or sort by date.
+1.  **Register/Login**: Securely create an account to save your history.
+2.  **Describe Symptoms**: Enter details like "I have a throbbing headache and sensitivity to light."
+3.  **Get Results**: The AI analyzes the text and prompts: *"Based on these symptoms, suggest possible conditions and next steps with educational disclaimer."*
+4.  **View History**: Check past analyses filtered by severity level.
 
-## ⚠️ Disclaimer
+## 🛡️ Safety & Reliability
 
-This tool is for **educational purposes only** and does not replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+*   **Data Privacy**: Passwords are hashed before storage.
+*   **Content Safety**: The LLM is prompted to always include medical disclaimers and avoid definitive diagnoses.
+*   **Error Handling**: graceful degradation if the AI service is unavailable.
+
+---
+*Submitted as part of the recruitment assignment.*

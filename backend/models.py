@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
-# SQLAlchemy Models
 class User(Base):
     __tablename__ = "users"
 
@@ -25,7 +24,6 @@ class SymptomCheck(Base):
     severity = Column(String(50))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-# Pydantic Models
 class UserCreate(BaseModel):
     username: str
     email: str

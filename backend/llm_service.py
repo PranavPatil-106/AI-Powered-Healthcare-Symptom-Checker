@@ -63,14 +63,11 @@ def analyze_symptoms(symptoms: str) -> dict:
         else:
             text_content = str(content)
             
-        # Extract Severity
         severity = "Unknown"
         if "Severity Level:" in text_content:
             try:
                 parts = text_content.split("Severity Level:")
                 if len(parts) > 1:
-                    # The part after "Severity Level:" contains the level and the rest of the text
-                    # We need to isolate the level (first line)
                     rest_of_text = parts[1].strip()
                     severity_line = rest_of_text.split("\n")[0]
                     
@@ -79,8 +76,6 @@ def analyze_symptoms(symptoms: str) -> dict:
                     elif "Moderate" in severity_part: severity = "Moderate"
                     elif "High" in severity_part: severity = "High"
                     
-                    # Remove the Severity line from the text content to avoid duplication/clutter
-                    # We reconstruct the text without the "Severity Level: ..." line
                     text_content = text_content.replace(f"Severity Level: {severity_line}", "").strip()
             except:
                 pass

@@ -14,9 +14,12 @@ if 'user_email' not in st.session_state:
 
 def login_page():
     st.title("Login")
-    email = st.text_input("Email", key="login_email")
-    password = st.text_input("Password", type="password", key="login_password")
-    if st.button("Login", key="login_button"):
+    with st.form("login_form"):
+        email = st.text_input("Email", key="login_email")
+        password = st.text_input("Password", type="password", key="login_password")
+        submitted = st.form_submit_button("Login")
+    
+    if submitted:
         with st.spinner("Logging in..."):
             result = st.session_state.api_client.login(email, password)
             if "access_token" in result:
@@ -30,10 +33,13 @@ def login_page():
 
 def signup_page():
     st.title("Sign Up")
-    username = st.text_input("Username", key="signup_username")
-    email = st.text_input("Email", key="signup_email")
-    password = st.text_input("Password", type="password", key="signup_password", help="Minimum 8 characters")
-    if st.button("Sign Up", key="signup_button"):
+    with st.form("signup_form"):
+        username = st.text_input("Username", key="signup_username")
+        email = st.text_input("Email", key="signup_email")
+        password = st.text_input("Password", type="password", key="signup_password", help="Minimum 8 characters")
+        submitted = st.form_submit_button("Sign Up")
+    
+    if submitted:
         if len(password) < 8:
             st.error("Password must be at least 8 characters long")
         else:
@@ -87,6 +93,8 @@ def main_page():
     if st.sidebar.button("Logout", key="logout_sidebar"):
         st.session_state.token = None
         st.session_state.username = None
+        if "daily_tip" in st.session_state:
+            del st.session_state["daily_tip"]
         st.rerun()
 
     # Main Content

@@ -9,7 +9,6 @@ import models
 import auth
 import llm_service
 
-# Create tables (if not using migration tool like Alembic)
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="AI Symptom Checker")
@@ -74,7 +73,6 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 def analyze_symptoms(input: models.SymptomInput, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     try:
         print(f"Analyzing symptoms for user {current_user.email}: {input.symptoms}")
-        # Call LLM Service
         analysis_result = llm_service.analyze_symptoms(input.symptoms)
         result_text = analysis_result["result"]
         severity = analysis_result["severity"]
@@ -82,7 +80,6 @@ def analyze_symptoms(input: models.SymptomInput, current_user: models.User = Dep
         print("LLM Result:", result_text[:50] + "...")
         print("Severity:", severity)
         
-        # Save to History
         new_check = models.SymptomCheck(
             user_id=current_user.id,
             symptoms=input.symptoms,
