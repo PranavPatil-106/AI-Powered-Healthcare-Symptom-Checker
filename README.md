@@ -13,7 +13,7 @@ The primary goal of this system is to bridge the gap between initial symptom ons
 
 ## 📋 Scope of Work
 
-This project fulfills the requirements of **Task 6: Healthcare Symptom Checker**, covering:
+This project fulfills the requirements of **Healthcare Symptom Checker**, covering:
 *   **Input**: User-friendly text interface for describing symptoms.
 *   **Output**: Structured response containing conditions, precautions, and when to see a doctor.
 *   **Interface**: A full-stack web application with a dedicated frontend form.
@@ -103,5 +103,3 @@ streamlit run frontend/app.py
 *   **Content Safety**: The LLM is prompted to always include medical disclaimers and avoid definitive diagnoses.
 *   **Error Handling**: graceful degradation if the AI service is unavailable.
 
----
-*Submitted as part of the recruitment assignment.*
