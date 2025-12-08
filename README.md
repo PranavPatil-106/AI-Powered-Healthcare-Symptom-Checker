@@ -11,6 +11,10 @@ The primary goal of this system is to bridge the gap between initial symptom ons
 
 > **Disclaimer**: This tool is for **educational purposes only** and does not replace professional medical advice.
 
+## 🎥 Video Demonstration
+
+Check out the project in action: [Watch Video](https://drive.google.com/file/d/1tZ8zE67Bss92FTNGcFQ1BezjdMnU-BG5/view?usp=sharing)
+
 ## 📋 Scope of Work
 
 This project fulfills the requirements of **Healthcare Symptom Checker**, covering:
