@@ -79,3 +79,23 @@ class APIClient:
                 return {"error": f"Server returned non-JSON response: {response.text}"}
         except Exception as e:
             return {"error": str(e)}
+
+    def delete_history_item(self, item_id):
+        if not self.token:
+            return {"error": "Not authenticated"}
+        
+        headers = {"Authorization": f"Bearer {self.token}"}
+        try:
+            response = requests.delete(
+                f"{self.base_url}/history/{item_id}",
+                headers=headers
+            )
+            if response.status_code == 204:
+                return {"success": True}
+            
+            try:
+                return {"error": response.json().get("detail", "Failed to delete history item")}
+            except ValueError:
+                return {"error": f"Server returned non-JSON response: {response.text}"}
+        except Exception as e:
+            return {"error": str(e)}

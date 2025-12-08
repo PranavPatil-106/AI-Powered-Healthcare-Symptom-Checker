@@ -101,3 +101,12 @@ def analyze_symptoms(input: models.SymptomInput, current_user: models.User = Dep
 def get_history(current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     history = db.query(models.SymptomCheck).filter(models.SymptomCheck.user_id == current_user.id).order_by(models.SymptomCheck.created_at.desc()).all()
     return history
+
+@app.delete("/history/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_history_item(item_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    item = db.query(models.SymptomCheck).filter(models.SymptomCheck.id == item_id, models.SymptomCheck.user_id == current_user.id).first()
+    if not item:
+        raise HTTPException(status_code=404, detail="History item not found")
+    db.delete(item)
+    db.commit()
+    return None

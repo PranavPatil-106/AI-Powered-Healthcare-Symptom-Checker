@@ -46,6 +46,7 @@ class SymptomResponse(BaseModel):
     severity: str | None = None
 
 class HistoryItem(BaseModel):
+    id: int
     symptoms: str
     result: str
     severity: str | None = None

@@ -90,6 +90,15 @@ def main_page():
     st.sidebar.info(f"💡 **Healthy Tip:**\n\n{st.session_state.daily_tip}")
     
     st.sidebar.markdown("---")
+    st.sidebar.markdown("""
+    **Process:**
+    1. Enter your symptoms in the text area below.
+    2. Click "Check Symptoms".
+    3. Review the probable conditions and recommendations.
+    
+    > **Disclaimer:** This tool is for educational purposes only and does not replace professional medical advice.
+    """)
+    st.sidebar.markdown("---")
     if st.sidebar.button("Logout", key="logout_sidebar"):
         st.session_state.token = None
         st.session_state.username = None
@@ -102,14 +111,6 @@ def main_page():
 
     with tab1:
         st.title("AI Symptom Checker")
-        st.markdown("""
-        **Process:**
-        1. Enter your symptoms in the text area below.
-        2. Click "Check Symptoms".
-        3. Review the probable conditions and recommendations.
-        
-        > **Disclaimer:** This tool is for educational purposes only and does not replace professional medical advice.
-        """)
         
         with st.form(key="symptom_form"):
             symptoms = st.text_area("Describe your symptoms here...", height=150, key="symptoms_input")
@@ -185,6 +186,16 @@ def main_page():
                         st.markdown(f"**Symptoms:** {item['symptoms']}")
                         st.markdown("---")
                         st.markdown(f"**Analysis:**\n{item['result']}")
+                        
+                        if st.button("Delete Record", key=f"del_{item.get('id', 'unknown')}"):
+                            with st.spinner("Deleting..."):
+                                res = st.session_state.api_client.delete_history_item(item.get('id'))
+                                if res.get("success"):
+                                    st.success("Record deleted.")
+                                    time.sleep(1)
+                                    st.rerun()
+                                else:
+                                    st.error(res.get("error", "Failed to delete."))
             else:
                 st.error(history.get("error", "Failed to load history"))
 
