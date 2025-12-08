@@ -95,7 +95,7 @@ streamlit run frontend/app.py
 1.  **Register/Login**: Securely create an account to save your history.
 2.  **Describe Symptoms**: Enter details like "I have a throbbing headache and sensitivity to light."
 3.  **Get Results**: The AI analyzes the text and prompts: *"Based on these symptoms, suggest possible conditions and next steps with educational disclaimer."*
-4.  **View History**: Check past analyses filtered by severity level.
+4.  **View History**: Browse past analyses with severity filtering, sort usage history by date, and delete individual records.
 
 ## 🛡️ Safety & Reliability
 
